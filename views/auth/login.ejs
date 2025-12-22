@@ -4,60 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> | MangaVerse</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <%- include('../partials/navbar') %>
   
-  <main class="main-content">
-    <%- include('../partials/flash') %>
-    
-    <div class="auth-container">
-      <div class="auth-card">
-        <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
-        <p>Welcome back to MangaVerse!</p>
-
-        <form action="/auth/login" method="POST" class="auth-form">
-          <div class="form-group">
-            <label for="email">
-              <i class="fas fa-user"></i> Username or Email
-            </label>
-            <input 
-              type="text" 
-              id="email" 
-              name="email" 
-              required 
-              placeholder="username or email"
-            >
+  <main class="main-content no-padding"> <div class="split-screen">
+      
+      <div class="split-left">
+        <div class="brand-content">
+          <h1 class="giga-title">MangaVerse</h1>
+          <div class="hero-image-wrapper">
+             <img src="/images/auth.png" alt="MangaVerse Hero" class="hero-image">
           </div>
-
-          <div class="form-group">
-            <label for="password">
-              <i class="fas fa-lock"></i> Password
-            </label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              required 
-              placeholder="••••••••"
-            >
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block">
-            Login
-          </button>
-        </form>
-
-        <div class="auth-footer">
-          <p>Don't have an account? <a href="/auth/signup">Sign up here</a></p>
         </div>
+        <div class="bg-decoration"></div>
+      </div>
+
+      <div class="split-right">
+        
+        <div class="auth-card">
+          <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
+          <p>Welcome back to MangaVerse!</p>
+
+          <form action="/auth/login" method="POST" class="auth-form">
+            <div class="form-group">
+              <label for="email">
+                <i class="fas fa-user"></i> Username or Email
+              </label>
+              <input 
+                type="text" 
+                id="email" 
+                name="email" 
+                required 
+                placeholder="username or email"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="password">
+                <i class="fas fa-lock"></i> Password
+              </label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                required 
+                placeholder="••••••••"
+              >
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Login
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            <p>Don't have an account? <a href="/auth/signup">Sign up here</a></p>
+          </div>
+        </div>
+
       </div>
     </div>
-  </main>
 
-  <%- include('../partials/footer') %>
+  </main>
   
   <script src="/js/main.js"></script>
 </body>

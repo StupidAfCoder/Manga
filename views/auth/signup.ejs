@@ -4,89 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> | MangaVerse</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style3.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <%- include('../partials/navbar') %>
   
-  <main class="main-content">
-    <%- include('../partials/flash') %>
+  <main class="main-content no-padding">
     
-    <div class="auth-container">
-      <div class="auth-card">
-        <h1><i class="fas fa-user-plus"></i> Sign Up</h1>
-        <p>Join the MangaVerse community!</p>
-
-        <form action="/auth/signup" method="POST" class="auth-form">
-          <div class="form-group">
-            <label for="username">
-              <i class="fas fa-user"></i> Username
-            </label>
-            <input 
-              type="text" 
-              id="username" 
-              name="username" 
-              required 
-              minlength="3"
-              placeholder="Choose a username"
-            >
+    <div class="split-screen">
+      
+      <div class="split-left">
+        <div class="brand-content">
+          <h1 class="giga-title">MangaVerse</h1>
+          <div class="hero-image-wrapper">
+             <img src="/images/auth.png" alt="MangaVerse Signup Hero" class="hero-image">
           </div>
-
-          <div class="form-group">
-            <label for="email">
-              <i class="fas fa-envelope"></i> Email
-            </label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              required 
-              placeholder="your@email.com"
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="password">
-              <i class="fas fa-lock"></i> Password
-            </label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              required 
-              minlength="6"
-              placeholder="••••••••"
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="confirmPassword">
-              <i class="fas fa-lock"></i> Confirm Password
-            </label>
-            <input 
-              type="password" 
-              id="confirmPassword" 
-              name="confirmPassword" 
-              required 
-              minlength="6"
-              placeholder="••••••••"
-            >
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block">
-            Create Account
-          </button>
-        </form>
-
-        <div class="auth-footer">
-          <p>Already have an account? <a href="/auth/login">Login here</a></p>
         </div>
+        <div class="bg-decoration"></div>
+      </div>
+
+      <div class="split-right">
+        
+        <div class="auth-card">
+          <h1><i class="fas fa-user-plus"></i> Sign Up</h1>
+          <p>Join the MangaVerse community!</p>
+
+          <form action="/auth/signup" method="POST" class="auth-form">
+            
+            <div class="form-group">
+              <label for="username">
+                <i class="fas fa-user"></i> Username
+              </label>
+              <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                required 
+                minlength="3"
+                placeholder="Choose a username"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="email">
+                <i class="fas fa-envelope"></i> Email
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                placeholder="your@email.com"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="password">
+                <i class="fas fa-lock"></i> Password
+              </label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                required 
+                minlength="6"
+                placeholder="••••••••"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">
+                <i class="fas fa-lock"></i> Confirm Password
+              </label>
+              <input 
+                type="password" 
+                id="confirmPassword" 
+                name="confirmPassword" 
+                required 
+                minlength="6"
+                placeholder="••••••••"
+              >
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Create Account
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            <p>Already have an account? <a href="/auth/login">Login here</a></p>
+          </div>
+        </div>
+
       </div>
     </div>
-  </main>
 
-  <%- include('../partials/footer') %>
+  </main>
   
   <script src="/js/main.js"></script>
 </body>

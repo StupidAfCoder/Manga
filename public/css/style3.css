@@ -1,0 +1,370 @@
+/* =========================================
+   MANGAVERSE - EXTREME DARK / 3D ANIME THEME
+   ========================================= */
+
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --brand-blue: #4876ff;
+      --brand-lime: #d9f154;
+      --brand-orange: #ff7347;
+      --brand-pink: #f7d0e9;
+      --brand-purple: #c084fc;
+      
+      --bg-dark: #09090b; /* Zinc 950 */
+      --card-bg: #18181b; /* Zinc 900 */
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+
+      /* Fluid Typography */
+      --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+      --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+      --step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+      --step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+      --step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+      --step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+      --step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
+      --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
+      --step-6: clamp(3.3592rem, 2.8691rem + 2.4507vw, 4.7684rem);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: "DM Mono", monospace;
+      margin: 0;
+      color: var(--text-main);
+      background-color: var(--bg-dark);
+      /* Optional texture overlay */
+      background-image: url("https://assets.codepen.io/1385231/bg-texture.webp");
+      background-blend-mode: overlay;
+      background-repeat: repeat;
+    }
+
+    h1, h2, h3 { font-family: "Bowlby One SC", cursive; }
+
+    .main-content { padding: 40px 12px; }
+
+
+    /* =========================================
+   AUTH PAGES (Login / Signup)
+   ========================================= */
+
+/* Center the login card vertically and horizontally */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px); /* Adjust based on navbar/footer height */
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* The "Manga Panel" Card */
+.auth-card {
+  background-color: var(--card-bg);
+  border: 2px solid var(--text-main);
+  /* Hard shadow creates the 3D/Pop-art look */
+  box-shadow: 10px 10px 0px var(--brand-blue); 
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+}
+
+/* Header Styling */
+.auth-card h1 {
+  color: var(--brand-lime); /* Lime pops against dark bg */
+  font-size: var(--step-2);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #000;
+}
+
+.auth-card p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: var(--step--1);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--brand-purple);
+  font-family: "Bowlby One SC", cursive; /* Chunky font for labels */
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.form-group label i {
+  margin-right: 8px;
+  color: var(--brand-pink);
+}
+
+/* Inputs - High Contrast */
+.auth-form input {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #000; /* Pitch black input bg */
+  border: 1px solid var(--text-muted);
+  color: var(--text-main);
+  font-family: "DM Mono", monospace;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.auth-form input::placeholder {
+  color: #444;
+}
+
+/* Input Focus Effects - Neon Glow */
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--brand-lime);
+  box-shadow: 0 0 15px rgba(217, 241, 84, 0.15); /* Subtle glow */
+  border-left: 5px solid var(--brand-lime); /* Anime speed-line effect */
+}
+
+/* Button Styling - Brutalist */
+.btn-primary {
+  background-color: var(--brand-blue);
+  color: #fff;
+  font-family: "Bowlby One SC", cursive;
+  font-size: 1.2rem;
+  border: 2px solid transparent;
+  padding: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-top: 1rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-lime);
+  color: #000;
+  transform: translate(-4px, -4px); /* Moves up/left */
+  box-shadow: 6px 6px 0px var(--brand-pink); /* Pink shadow appears */
+}
+
+.btn-primary:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+/* Footer Link */
+.auth-footer {
+  margin-top: 2rem;
+  text-align: center;
+  border-top: 1px dashed var(--text-muted);
+  padding-top: 1.5rem;
+}
+
+.auth-footer p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.auth-footer a {
+  color: var(--brand-orange);
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+}
+
+.auth-footer a:hover {
+  color: var(--brand-lime);
+}
+
+/* Underline animation for link */
+.auth-footer a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--brand-lime);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.auth-footer a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .auth-card {
+    box-shadow: 6px 6px 0px var(--brand-blue);
+    padding: 1.5rem;
+  }
+}
+/* =========================================
+   SPLIT SCREEN LOGIN LAYOUT
+   ========================================= */
+
+/* Remove default padding from main for this page only */
+.main-content.no-padding {
+  padding: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.split-screen {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* --- LEFT SIDE (Visuals) --- */
+.split-left {
+  flex: 1; /* Takes up 50% */
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-right: 4px solid var(--text-main);
+  
+  /* Anime-style Grid Background */
+  background-image: 
+    linear-gradient(var(--card-bg) 2px, transparent 2px),
+    linear-gradient(90deg, var(--card-bg) 2px, transparent 2px);
+  background-size: 40px 40px;
+}
+
+.brand-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* The Giant "MangaVerse" Text */
+.giga-title {
+  font-family: "Bowlby One SC", cursive;
+  font-size: clamp(3rem, 8vw, 6rem); /* Responsive Huge Text */
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--brand-lime); /* Hollow text effect */
+  text-shadow: 5px 5px 0px var(--brand-blue);
+  transform: rotate(-3deg); /* Slight tilt for dynamism */
+  margin-bottom: 2rem;
+  letter-spacing: -2px;
+}
+
+/* The Image Wrapper */
+.hero-image-wrapper {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* The Image styling */
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Grayscale to Pop colored accents, or keep full color */
+  filter: contrast(1.2) grayscale(0.2); 
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  transition: transform 0.3s ease;
+}
+
+.hero-image:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* Decorative Background circle behind image */
+.bg-decoration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--brand-purple) 0%, transparent 70%);
+  opacity: 0.2;
+  z-index: 1;
+  filter: blur(50px);
+}
+
+/* --- RIGHT SIDE (Form) --- */
+.split-right {
+  flex: 1; /* Takes up 50% */
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Add a subtle pattern to the right side too */
+.split-right::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(var(--card-bg) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Reuse the Auth Card from previous step, but ensure z-index */
+.auth-card {
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  background-color: rgba(24, 24, 27, 0.95); /* Slight transparency */
+  backdrop-filter: blur(5px);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 900px) {
+  .split-screen {
+    flex-direction: column;
+  }
+  
+  .split-left {
+    flex: none;
+    height: 40vh; /* Visuals take top 40% on mobile */
+    border-right: none;
+    border-bottom: 4px solid var(--text-main);
+  }
+
+  .giga-title {
+    font-size: 3rem;
+  }
+  
+  .hero-image-wrapper {
+    max-width: 200px;
+  }
+
+  .split-right {
+    flex: none;
+    min-height: 60vh;
+    padding-top: 3rem;
+    align-items: flex-start;
+  }
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2rem; }
+  .manga-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .manga-cover { height: 240px; }
+  .navbar { background: #000; }
+}
