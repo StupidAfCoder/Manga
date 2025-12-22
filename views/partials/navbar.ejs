@@ -2,7 +2,6 @@
   <div class="container">
     <div class="nav-brand">
       <a href="/">
-        <i class="fas fa-book-open"></i>
         <span>MangaVerse</span>
       </a>
     </div>
@@ -22,24 +21,14 @@
         <button type="submit" class="search-btn">
           <i class="fas fa-search"></i>
         </button>
+        <div class="search-suggestions" role="listbox" aria-hidden="true"></div>
       </form>
 
-      <!-- User Menu -->
+      <!-- User Menu (show only username and logout in one row) -->
       <% if (currentUser) { %>
-        <div class="user-menu">
-          <button class="user-btn" onclick="toggleUserDropdown()">
-            <i class="fas fa-user"></i>
-            <span><%= currentUser.username %></span>
-            <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="user-dropdown" id="userDropdown">
-            <a href="/discussions/create">
-              <i class="fas fa-plus"></i> Create Discussion
-            </a>
-            <a href="/auth/logout">
-              <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-          </div>
+        <div class="user-area">
+          <span class="user-name"><i class="fas fa-user"></i>&nbsp;<%= currentUser.username %></span>
+          <a href="/auth/logout" class="user-logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
         </div>
       <% } else { %>
         <a href="/auth/login" class="btn btn-outline">Login</a>
@@ -49,23 +38,10 @@
 
     <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-      <i class="fas fa-bars"></i>
+    
     </button>
   </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="/">Home</a>
-  <a href="/trending">Trending</a>
-  <a href="/top-rated">Top Rated</a>
-  <a href="/manga">All Manga</a>
-  <a href="/discussions">Discussions</a>
-  <% if (currentUser) { %>
-    <a href="/discussions/create">Create Discussion</a>
-    <a href="/auth/logout">Logout</a>
-  <% } else { %>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Sign Up</a>
-  <% } %>
-</div>
+

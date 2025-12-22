@@ -6,30 +6,103 @@
   <title><%= title %> | MangaVerse</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
   <%- include('partials/navbar') %>
   
-  <main class="main-content">
+<div id="intro-overlay">
+  <div class="rays-container">
+    <div class="ray ray-1"></div>
+    <div class="ray ray-2"></div>
+    <div class="ray ray-3"></div>
+    <div class="ray ray-4"></div>
+    <div class="ray ray-5"></div>
+    <div class="ray ray-6"></div>
+    <div class="ray ray-7"></div>
+  </div>
+  
+  <div class="intro-content">
+    <h1 class="bluish-text">MANGAVERSE</h1>
+    
+    <div class="loading-track">
+      <div class="loading-bar">
+        <div class="runner"></div>
+      </div>
+    </div>
+  </div>
+</div>
     <%- include('partials/flash') %>
     
     <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Welcome to <span class="gradient-text">MangaVerse</span></h1>
-          <p>Discover, discuss, and rate your favorite manga with our community</p>
-          <div class="hero-actions">
-            <a href="/manga" class="btn btn-primary btn-large">
-              <i class="fas fa-book"></i> Browse Manga
-            </a>
-            <a href="/discussions" class="btn btn-outline btn-large">
-              <i class="fas fa-comments"></i> Join Discussions
-            </a>
-          </div>
-        </div>
+  <section class="hero">
+  <div id="dot-grid-container">
+    <canvas id="dot-grid-canvas"></canvas>
+  </div>
+
+  <div class='light x1'></div>
+  <div class='light x2'></div>
+  <div class="wrapper">
+    <div class="inner" style="--quantity: 10;">
+      
+      <div class="card" style="--index: 0; --color-card: 255, 0, 60;">
+        <div class="img" style="background-image: url('/images/bleachhero.png');"></div>
       </div>
-    </section>
+
+      <div class="card" style="--index: 1; --color-card: 0, 243, 255;">
+        <div class="img" style="background-image: url('/images/onepiece.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 2; --color-card: 0, 255, 136;">
+        <div class="img" style="background-image: url('/images/narutohero.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 3; --color-card: 224, 224, 224;">
+        <div class="img" style="background-image: url('/images/demonslayerhero.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 4; --color-card: 255, 0, 60;">
+        <div class="img" style="background-image: url('/images/jujutsuhero.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 5; --color-card: 0, 243, 255;">
+        <div class="img" style="background-image: url('/images/deathnotehero.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 6; --color-card: 0, 255, 136;">
+        <div class="img" style="background-image: url('/images/bleachhero.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 7; --color-card: 224, 224, 224;">
+        <div class="img" style="background-image: url('/images/onepiece.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 8; --color-card: 255, 0, 60;">
+        <div class="img" style="background-image: url('/images/demonslayerhero.png');"></div>
+      </div>
+
+      <div class="card" style="--index: 9; --color-card: 0, 243, 255;">
+        <div class="img" style="background-image: url('/images/narutohero.png');"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container hero-container-overlay">
+    <div class="hero-content">
+      <h1>Welcome to <span class="gradient-text">MangaVerse</span></h1>
+      <p>Discover, discuss, and rate your favorite manga with our community</p>
+      <div class="hero-actions">
+        <a href="/manga" class="btn btn-primary btn-large">
+          <i class="fas fa-book"></i> Explore
+        </a>
+        <a href="/discussions" class="btn btn-outline btn-large">
+          <i class="fas fa-comments"></i> Discussions
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- Featured Section -->
     <section class="section">
