@@ -30,40 +30,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /trending - Trending manga page
-router.get('/trending', async (req, res) => {
-  try {
-    const period = req.query.period || 'all';
-    let dateFilter = {};
-    
-    // Calculate date ranges for filtering
-    const now = new Date();
-    if (period === 'week') {
-      const weekAgo = new Date(now.setDate(now.getDate() - 7));
-      dateFilter = { updatedAt: { $gte: weekAgo } };
-    } else if (period === 'month') {
-      const monthAgo = new Date(now.setMonth(now.getMonth() - 1));
-      dateFilter = { updatedAt: { $gte: monthAgo } };
-    }
-    
-    const trendingManga = await Manga.find(dateFilter)
-      .sort({ viewCount: -1, averageRating: -1 })
-      .limit(20);
-
-    res.render('trending', { 
-      title: 'Trending Manga',
-      manga: trendingManga,
-      currentPeriod: period
-    });
-  } catch (error) {
-    console.error(error);
-    res.render('trending', { 
-      title: 'Trending Manga',
-      manga: [],
-      currentPeriod: 'all'
-    });
-  }
-});
+// NOTE: Trending page removed - route intentionally omitted
 
 // GET /top-rated - Top rated manga page
 router.get('/top-rated', async (req, res) => {

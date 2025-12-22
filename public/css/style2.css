@@ -2,56 +2,290 @@
    MANGAVERSE - EXTREME DARK / 3D ANIME THEME
    ========================================= */
 
-:root {
-  /* --- CORE PALETTE (Deep Dark) --- */
-  --bg-primary: #050505;       /* Void Black */
-  --bg-secondary: #0f0f0f;     /* Dark Card Background */
-  --bg-tertiary: #1a1a1a;      /* Lighter accents */
-  --bg-dark-hard: #000000;     /* Navbar/Footer */
-  --bg-dark-soft: #141414;
-  
-  /* --- TEXT --- */
-  --text-primary: #ffffff;     /* Pure White */
-  --text-secondary: #e0e0e0;   /* Silver */
-  --text-muted: #888888;       /* Grey */
-  --fg-light: #ffffff;
-  
-  /* --- ANIME ACCENTS (Neon 3D) --- */
-  --red: #ff003c;              /* Cyber Red */
-  --green: #00ff88;            /* Matrix Green */
-  --blue: #00f3ff;             /* Holo Blue */
-  --silver: #c0c0c0;           /* Metallic */
-  --accent: #ff003c;           /* Primary Accent (Red) */
-  --accent-hover: #ff3366;
-  --border: #333333;
-  
-  /* --- EFFECTS --- */
-  --glow-red: 0 0 15px rgba(255, 0, 60, 0.4);
-  --glow-green: 0 0 15px rgba(0, 255, 136, 0.4);
-  --glow-silver: 0 0 20px rgba(192, 192, 192, 0.2);
-  --shadow-3d: 0 5px 0 #80001e; /* 3D Button Depth */
-  --glass: blur(10px) saturate(180%);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  min-height: 100vh;
-  display: flex; 
-  flex-direction: column; 
-  font-size: 16px;
-  overflow-x: hidden;
-  /* Subtle Grid Pattern for Anime Tech Vibe */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
+    :root {
+      --brand-blue: #4876ff;
+      --brand-lime: #d9f154;
+      --brand-orange: #ff7347;
+      --brand-pink: #f7d0e9;
+      --brand-purple: #c084fc;
+      
+      --bg-dark: #09090b; /* Zinc 950 */
+      --card-bg: #18181b; /* Zinc 900 */
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+
+      /* Fluid Typography */
+      --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+      --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+      --step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+      --step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+      --step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+      --step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+      --step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
+      --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
+      --step-6: clamp(3.3592rem, 2.8691rem + 2.4507vw, 4.7684rem);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: "DM Mono", monospace;
+      margin: 0;
+      color: var(--text-main);
+      background-color: var(--bg-dark);
+      /* Optional texture overlay */
+      background-image: url("https://assets.codepen.io/1385231/bg-texture.webp");
+      background-blend-mode: overlay;
+      background-repeat: repeat;
+    }
+
+    h1, h2, h3 { font-family: "Bowlby One SC", cursive; }
+
+    .main-content { padding: 40px 12px; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Page Header Styles */
+    .page-header {
+      text-align: center;
+      margin-top: 5rem;
+      margin-bottom: 3rem;
+    }
+    .page-header h1 {
+      font-size: var(--step-5);
+      color: blue
+      text-transform: uppercase;
+      margin: 0;
+      line-height: 1;
+    }
+    .page-header p {
+      font-size: var(--step-0);
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    /* Filter Bar Styles (Brutalist Style) */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: "Bowlby One SC";
+      text-decoration: none;
+      color: var(--text-muted);
+      border: 2px solid var(--text-muted);
+      padding: 10px 20px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      color: var(--bg-dark);
+      background-color: var(--brand-blue);
+      border-color: var(--brand-blue);
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0 var(--text-main);
+    }
+
+    /* GRID LAYOUT */
+    .manga-grid {
+      --min: 280px;
+      --gap: 2rem;
+      display: grid;
+      grid-gap: var(--gap);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+    }
+
+    /* CARD STYLES */
+    .manga-card {
+      padding: 1rem 2rem 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin: 0 auto;
+      /* Animation slide up */
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slideInFromBottom 0.8s forwards;
+    }
+    
+    /* Staggered Animation Delay for up to 20 items */
+    .manga-card:nth-child(1) { animation-delay: 0.1s; }
+    .manga-card:nth-child(2) { animation-delay: 0.2s; }
+    .manga-card:nth-child(3) { animation-delay: 0.3s; }
+    .manga-card:nth-child(4) { animation-delay: 0.4s; }
+    /* ... add more if needed via loop or js, kept simple here */
+
+    /* SVG Borders */
+    .horizontal-line, .vertical-line {
+      stroke-width: 2;
+      transition: opacity 0.3s ease;
+      color: var(--text-muted);
+      opacity: 0.4;
+    }
+    .horizontal-line {
+      margin-left: -8rem;
+      margin-right: -8rem;
+      height: auto;
+      width: calc(100% + 5rem);
+    }
+    .vertical-line { position: absolute; top: 0; height: 100%; }
+    .vertical-line.left { left: 1rem; }
+    .vertical-line.right { right: 1rem; }
+
+    .manga-card:hover :is(.horizontal-line, .vertical-line) {
+      opacity: 1;
+      color: var(--brand-blue);
+    }
+
+    /* Image Wrapper */
+    .manga-image-wrapper {
+      position: relative;
+      margin-bottom: 0.5rem;
+      padding-inline: 1rem;
+      height: 350px; /* Fixed height for consistency */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .manga-card img {
+      max-width: 100%;
+      height: 100%; 
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+      width: auto;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      transform-origin: center center;
+      transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .manga-card:hover img {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    /* Scribble SVG Background */
+    .scribble-svg {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      animation: squiggle 0.5s infinite;
+      transform: scale(1.2);
+    }
+    .scribble-path {
+      transform-origin: center;
+      opacity: 0.8;
+      transition: stroke-dashoffset 500ms ease-in;
+      stroke-dasharray: 1700;
+      stroke-dashoffset: 1700;
+      fill: none;
+    }
+    .manga-card:hover .scribble-path {
+      stroke-dashoffset: 0;
+    }
+
+    /* Text Content */
+    .title-wrapper {
+      position: relative;
+      min-height: 60px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .manga-title {
+      font-size: var(--step-0);
+      font-weight: bold;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      z-index: 5;
+    }
+
+    .manga-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      color: var(--text-muted);
+      font-family: "DM Mono";
+    }
+
+    /* The Button */
+    .product-button-wrapper {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 200ms;
+      z-index: 10;
+      background: rgba(0,0,0,0.4);
+    }
+    .manga-card:hover .product-button-wrapper {
+      opacity: 1;
+    }
+
+    /* Button CSS from reference */
+    .button-outer {
+      filter: drop-shadow(0 1px 0 #000) drop-shadow(4px 4px 0 #000);
+      transition: filter 0.3s ease-in-out;
+    }
+    .button-outer:hover {
+      filter: drop-shadow(0 0 0 #000);
+    }
+    .button-outer:hover .button-middle {
+      transform: translate(4px, 4px);
+    }
+    .button-middle {
+      display: block;
+      text-decoration: none;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+      border: none;
+    }
+    .button-inner {
+      /* Bluish gradient to match main site buttons */
+      background: linear-gradient(90deg, #00f3ff 0%, #0066ff 100%);
+      color: #02121a;
+      padding: 0.6rem 1rem;
+      font-family: "Bowlby One SC";
+      font-size: 1rem;
+      clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+    }
+
+    /* Animations */
+    @keyframes slideInFromBottom {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes squiggle {
+      0% { filter: url("#squiggle-0"); }
+      25% { filter: url("#squiggle-1"); }
+      50% { filter: url("#squiggle-2"); }
+      75% { filter: url("#squiggle-3"); }
+      100% { filter: url("#squiggle-4"); }
+    }
+    
+    .empty-state { text-align: center; color: var(--text-muted); padding: 50px; }
 
 /* =========================================
    SILVER RAYS INTRO ANIMATION
@@ -569,438 +803,6 @@ h1 { font-size: 2.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
 .btn-small { padding: 0.35rem 0.7rem; font-size: 0.78rem; border-radius: 999px; }
 
-/* =========================================
-   HERO SECTION
-   ========================================= */
-/* =========================================
-   HERO SECTION WITH 3D CARDS
-   ========================================= */
-.hero {
-  position: relative;
-  min-height: 120vh; /* Taller to fit the ring */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 80%);
-  border-bottom: 1px solid #222;
-}
-
-/* --- 3D ANIMATION WRAPPER --- */
-.wrapper {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 1; /* Sits behind text */
-  perspective: 1000px; /* Essential for 3D effect */
-}
-
-/* Update this specific class in your CSS */
-.inner {
-  --w: 120px;
-  --h: 180px;
-  --translateZ: calc((var(--w) + var(--h)) + 50px);
-  --rotateX: -15deg;
-  --perspective: 1000px;
-  
-  position: absolute;
-  width: var(--w);
-  height: var(--h);
-  z-index: 2;
-  transform-style: preserve-3d;
-  transform: perspective(var(--perspective));
-  animation: rotating 25s linear infinite;
-  
-  /* --- CHANGED THIS --- */
-  /* Was 45%, changing to 15% moves it UPwards */
-  top: 25%; 
-  
-  left: calc(50% - (var(--w) / 2));
-}
-
-@keyframes rotating {
-  from {
-    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
-  }
-  to {
-    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
-  }
-}
-
-/* --- CARD STYLING --- */
-.card {
-  position: absolute;
-  border: 1px solid rgba(var(--color-card), 0.8);
-  border-radius: 8px;
-  overflow: hidden;
-  inset: 0;
-  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
-  background: #000;
-  box-shadow: 0 0 15px rgba(var(--color-card), 0.3); /* Neon Glow */
-  transition: box-shadow 0.3s;
-}
-
-/* Images inside cards */
-.card .img {
-  width: 100%; height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.8; /* Slightly dim so text pops */
-  
-  /* Gradient overlay to make it look "Cyber" */
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
-}
-
-
-.hero-container-overlay {
-  position: relative;
-  z-index: 10; /* Sits ON TOP of the cards */
-  pointer-events: none; /* Let clicks pass through empty space */
-}
-
-.hero-content {
-  text-align: center;
-  pointer-events: auto; /* Re-enable clicks for buttons/text */
-  
-  /* Add a dark backdrop blur behind text for readability */
-  padding: 2rem;
-  border-radius: 20px;
-}
-
-.hero h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
-}
-
-.hero p {
-  color: var(--text-secondary);
-  font-size: 1.2rem;
-  margin-bottom: 2.5rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-}
-
-/* --- MOBILE ADJUSTMENTS --- */
-@media (max-width: 768px) {
-  .hero { min-height: 80vh; }
-  .inner {
-    --w: 80px; --h: 120px;
-    --translateZ: 220px;
-    
-    /* On mobile, keep them a bit lower if needed, or keep 15% */
-    top: 25%; 
-  }
-  .hero h1 { font-size: 2.5rem; }
-}
-/* =========================================
-   CARDS (Manga Grid)
-   ========================================= */
-.manga-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2rem; margin-bottom: 4rem;
-}
-
-.manga-card {
-  background: var(--bg-secondary);
-  border: 1px solid #222;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  transition: var(--transition);
-}
-
-.manga-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  border-color: var(--red);
-  box-shadow: 0 0 20px rgba(255, 0, 60, 0.2);
-}
-
-.manga-cover {
-  height: 340px; background: #000; position: relative;
-}
-.manga-cover img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: 0.3s; }
-.manga-card:hover .manga-cover img { opacity: 1; filter: contrast(1.1); }
-
-.manga-overlay {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-}
-
-.manga-rating {
-  background: #000; border: 1px solid var(--green); color: var(--green);
-  box-shadow: 0 0 5px var(--green);
-  font-family: monospace; letter-spacing: 1px;
-}
-
-.manga-info {
-  padding: 1.25rem;
-  background: var(--bg-secondary);
-  border-top: 2px solid var(--bg-primary);
-}
-
-.manga-info h3 { font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem; }
-.manga-author { color: var(--text-muted); font-size: 0.85rem; }
-
-/* Genres */
-.genre-tag {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
-  border: 1px solid #333;
-  padding: 0.2rem 0.6rem;
-  font-size: 0.7rem; text-transform: uppercase;
-}
-
-/* Uiverse-style outer card for manga items */
-.outer {
-  width: 100%;
-  height: 420px; /* increased height for stronger presence */
-  border-radius: 10px;
-  padding: 6px; /* subtle frame */
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-  overflow: visible;
-}
-
-.outer .dot {
-  width: 6px; aspect-ratio: 1; position: absolute; background-color: #fff;
-  box-shadow: 0 0 8px #ffffff; border-radius: 100px; z-index: 6; right: 10%; top: 8%;
-  animation: moveDot 6s linear infinite;
-}
-
-@keyframes moveDot { 0%,100%{ top:8%; right:10%; } 25%{ top:8%; right:calc(100% - 35px);} 50%{ top:calc(100% - 30px); right:calc(100% - 35px);} 75%{ top:calc(100% - 30px); right:10%; } }
-
-.outer .card {
-  z-index: 1; width: 100%; height: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03);
-  background-size: cover; background-position: center; display:flex; align-items:center; justify-content:center;
-  position: relative; flex-direction: column; color: #fff; overflow: hidden;
-}
-.outer .card { transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease; transform-origin: center center; }
-.outer .card:hover { transform: perspective(900px) rotateX(8deg) rotateY(-10deg) translateY(-12px) scale(1.03); box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
-.outer .card .ray { width: 220px; height: 45px; border-radius: 100px; position: absolute; background-color: rgba(199,199,199,0.6); opacity: 0.18; box-shadow: 0 0 40px #fff; filter: blur(8px); transform-origin: 10%; top: 6%; left: -10%; transform: rotate(30deg); }
-.outer .card .text { font-weight: 800; font-size: 2.6rem; background: linear-gradient(45deg, #ffffff 4%, rgba(255,255,255,0.6) 30%, transparent 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-top: 12px; }
-.outer .card .manga-card-title { position: absolute; bottom: 12px; left: 12px; right: 12px; text-align: left; font-size: 0.98rem; font-weight: 700; color: #fff; text-shadow: 0 6px 18px rgba(0,0,0,0.7); background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.45)); padding: 8px 10px; border-radius: 6px; }
-.outer .line { width: 100%; height: 1px; position: absolute; background-color: rgba(255,255,255,0.03); }
-.outer .topl { top: 8%; background: linear-gradient(90deg, rgba(136,136,136,0.4) 30%, rgba(29,31,31,0.1) 70%); }
-.outer .bottoml { bottom: 8%; }
-.outer .leftl { left: 8%; width: 1px; height: 100%; background: linear-gradient(180deg, rgba(116,116,116,0.4) 30%, rgba(34,36,36,0.1) 70%); }
-.outer .rightl { right: 8%; width: 1px; height: 100%; }
-
-/* make links inside card take full area without affecting layout */
-.manga-card > a { display: block; height: 100%; color: inherit; text-decoration: none; }
-
-/* Container for the Dot Grid */
-#dot-grid-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0; /* Same level as lights, behind the 3D cards */
-  overflow: hidden;
-  pointer-events: all; /* Allows mouse interaction with dots */
-}
-
-#dot-grid-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Ensure wrapper (3D cards) stays on top */
-.wrapper {
-  z-index: 1; 
-  pointer-events: none; /* Let mouse pass through empty space to the dots */
-}
-
-/* Ensure cards themselves catch mouse events if needed */
-.wrapper .card {
-  pointer-events: auto;
-}
-/* =========================================
-   INPUTS & FORMS (Cyber Style)
-   ========================================= */
-.search-form {
- 
-  padding: 0.5rem 1rem; border-radius: 50px;
-}
-.search-form:focus-within {
-  border-color: var(--blue);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-}
-.search-input { color: #fff; font-weight: 500; }
-.search-btn { color: var(--blue); }
-
-.auth-card, .discussion-form, .manga-section, .thread-card {
-  background: var(--bg-secondary);
-  border: 1px solid #222;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-input, textarea, select {
-  background: #0a0a0a !important;
-  border: 1px solid #333 !important;
-  color: #fff !important;
-}
-input:focus, textarea:focus {
-  border-color: var(--green) !important;
-  box-shadow: var(--glow-green) !important;
-}
-
-/* =========================================
-   STATS & SECTION HEADERS
-   ========================================= */
-.section-header h2 i { color: var(--red); text-shadow: var(--glow-red); }
-/* Centered section header and themed "View All" button */
-.section-header {
-  display: block;
-  text-align: center;
-  padding: 1.1rem 0 0.6rem 0; /* increased top padding */
-  margin-bottom: 1.6rem;
-}
-.section-header h2 { margin: 0; font-size: 1.5rem; padding: 0.6rem 0; }
-.view-all {
-  display: inline-block;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(0,243,255,0.08), rgba(255,0,60,0.04));
-  color: var(--text-secondary);
-  font-weight: 700;
-  text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.03);
-  /* positioned at bottom-right of section container */
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  z-index: 1200;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-}
-.view-all:hover { color: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.6); transform: translateY(-3px); }
-
-/* Ensure the section container is positioned for absolute placement */
-.section .container { position: relative; padding-bottom: 3.2rem; }
-
-.stat-card {
-  background: linear-gradient(145deg, #111, #080808);
-  border: 1px solid #222;
-  padding: 2rem; border-radius: 8px;
-  text-align: center;
-  transition: 0.3s;
-}
-.stat-card:hover { border-color: var(--silver); transform: translateY(-3px); }
-.stat-icon { font-size: 2rem; color: var(--silver); margin-bottom: 1rem; }
-
-/* =========================================
-   ANIMATIONS & UTILS
-   ========================================= */
-@keyframes rotateRays {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes textShine {
-  0% { text-shadow: 0 0 10px rgba(255,255,255,0.1); }
-  100% { text-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.2); }
-}
-
-@keyframes loadProgress {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
-
-/* Ensure hero allows page background (dot grid) to show through
-   Use a subtle overlay via ::before so the body background remains visible */
-.hero {
-  background: transparent !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  position: relative;
-  z-index: 0;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  /* subtle radial vignette overlay to keep contrast while showing dot grid */
-  background: radial-gradient(circle at center, rgba(26,26,26,0.25) 0%, rgba(0,0,0,0.45) 65%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Ensure hero content sits above the overlay */
-.hero-content { position: relative; z-index: 5; }
-
-/* Hero text entrance animations (triggered after intro finishes)
-   Uses a body class `intro-done` which is added by JS. */
-.intro-done .hero-content h1 {
-  transform: translateY(18px) scale(0.98);
-  opacity: 0;
-  animation: heroHeadlineIn 720ms cubic-bezier(.2,.9,.2,1) 0ms both;
-}
-.intro-done .hero-content p {
-  transform: translateY(10px);
-  opacity: 0;
-  animation: heroSubtitleIn 720ms cubic-bezier(.2,.9,.2,1) 140ms both;
-}
-
-@keyframes heroHeadlineIn {
-  0% { transform: translateY(18px) scale(0.98); opacity: 0; filter: blur(6px); }
-  60% { transform: translateY(-6px) scale(1.02); opacity: 1; filter: blur(0); }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-@keyframes heroSubtitleIn {
-  0% { transform: translateY(10px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-/* Gradient shine and stronger text-shadow for headline */
-.hero-content h1, .hero-content h1 .gradient-text {
-}
-
-.gradient-text {
-  background: linear-gradient(90deg, #00f3ff, #b084f1, #e86c83);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 3.6s linear infinite;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Slight pulsing glow on headline after entrance */
-.intro-done .hero-content h1 {
-  animation-name: heroHeadlineIn, headlineGlow;
-  animation-duration: 720ms, 3200ms;
-  animation-timing-function: cubic-bezier(.2,.9,.2,1), ease-in-out;
-  animation-delay: 0ms, 900ms;
-  animation-fill-mode: both, forwards;
-}
-
-@keyframes headlineGlow {
-  0% { text-shadow: 0 8px 24px rgba(0,0,0,0.75); }
-  50% { text-shadow: 0 14px 40px rgba(0,0,0,0.8), 0 4px 16px rgba(0,243,255,0.06); }
-  100% { text-shadow: 0 8px 24px rgba(0,0,0,0.75); }
-}
-
-
-/* Status Badges */
-.manga-status.Ongoing { 
-  background: rgba(0, 255, 136, 0.1); color: var(--green); border-color: var(--green); 
-}
-.manga-status.Completed { 
-  background: rgba(0, 243, 255, 0.1); color: var(--blue); border-color: var(--blue); 
-}
 
 /* =========================================
    CLASSY CYBER FOOTER
@@ -1214,18 +1016,7 @@ input:focus, textarea:focus {
     text-align: center;
   }
 }
-
-/* Thread/Discussion Specifics */
-.thread-card {
-  border-left: 3px solid var(--border);
-}
-.thread-card:hover {
-  border-left-color: var(--red);
-}
-.author-avatar {
-  background: #000; border: 2px solid var(--silver); color: var(--silver);
-  box-shadow: var(--glow-silver);
-}
+\
 
 /* Mobile */
 @media (max-width: 768px) {

@@ -189,29 +189,67 @@ function initDotGrid() {
     }
 
     // Init
-    window.addEventListener('resize', resize);
-    resize();
-    animate();
-}
-  // ========================================
-  // NEW: INTRO ANIMATION HANDLER
-  // ========================================
-const intro = document.getElementById("intro-overlay");
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+    }
 
-if (intro) {
-  document.body.style.overflow = "hidden";
+    // Split intro text earlier if needed (ensure function exists)
+    if (typeof splitIntroText === 'function') splitIntroText();
 
-  setTimeout(() => {
-    intro.classList.add("fade-out");
-    document.body.classList.add("intro-done");
-    document.body.style.overflow = "";
-  }, 4500); // matches loading animation
-}
+    // ========================================
+    // INTRO ANIMATION HANDLER (robust)
+    // ========================================
+    const intro = document.getElementById('intro-overlay');
+    const INTRO_DELAY_MS = 4500;
 
+    function finishIntro(immediate = false) {
+      if (!intro) return;
 
-  // ... existing init functions ...
-  initMobileMenu();
-  initUserDropdown();
+      // If immediate, speed up animations
+      if (immediate) {
+        intro.classList.add('fade-out');
+        document.body.classList.add('intro-done');
+        // remove after transition
+        const done = () => {
+          intro.style.display = 'none';
+          intro.removeEventListener('transitionend', done);
+        };
+        intro.addEventListener('transitionend', done);
+        document.body.style.overflow = '';
+        return;
+      }
+
+      // Normal finish: start fade, enable hero, then remove after transition
+      intro.classList.add('fade-out');
+      document.body.classList.add('intro-done');
+
+      const onEnd = (e) => {
+        if (e.target !== intro) return;
+        intro.style.display = 'none';
+        intro.removeEventListener('transitionend', onEnd);
+        document.body.style.overflow = '';
+      };
+
+      intro.addEventListener('transitionend', onEnd);
+    }
+
+    if (intro) {
+      // prevent scroll while intro running
+      document.body.style.overflow = 'hidden';
+
+      // allow skipping the intro by click or any key
+      const skipHandler = () => finishIntro(true);
+      intro.addEventListener('click', skipHandler);
+      document.addEventListener('keydown', skipHandler, { once: true });
+
+      // fallback: finish after delay
+      setTimeout(() => finishIntro(false), INTRO_DELAY_MS);
+    }
+
+      // ... existing init functions ...
+      initMobileMenu();
+      initUserDropdown();
   // ... rest of your JS ...
 });
 
