@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> | MangaVerse</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style2.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
   <%- include('../partials/navbar') %>
@@ -14,55 +15,95 @@
     <%- include('../partials/flash') %>
     
     <div class="container">
-      <div class="page-header">
-        <h1><i class="fas fa-comments"></i> <%= title %></h1>
-        <p>Join the conversation with fellow manga fans</p>
-      </div>
+      
+      <div class="discussion-top-bar">
+        <div class="header-pill">
+          <h1>POPULAR DISCUSSIONS</h1>
+        </div>
 
-      <div class="discussion-actions">
-        <% if (currentUser) { %>
-          <a href="/discussions/create" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Create New Discussion
-          </a>
-        <% } else { %>
-          <a href="/auth/login" class="btn btn-primary">
-            <i class="fas fa-sign-in-alt"></i> Login to Create Discussion
-          </a>
-        <% } %>
+       <div class="header-actions">
+  
+  <form action="/discussions" method="GET" class="inline-search">
+    <div class="search-wrapper">
+      <input 
+        type="text" 
+        name="search" 
+        placeholder="Search topics..." 
+        class="pill-input"
+        value="<%= typeof search !== 'undefined' ? search : '' %>"
+      >
+      
+      <% if (typeof search !== 'undefined' && search) { %>
+        <a href="/discussions" class="clear-btn" title="Clear Search">
+          <i class="fas fa-times"></i>
+        </a>
+      <% } else { %>
+        <button type="submit" class="icon-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      <% } %>
+    </div>
+  </form>
+
+  <% if (currentUser) { %>
+    <a href="/discussions/create" class="btn btn-primary create-btn">
+      <span>Create</span> <i class="fas fa-plus"></i>
+    </a>
+  <% } else { %>
+    <a href="/auth/login" class="btn btn-outline create-btn">
+      <span>Login</span>
+    </a>
+  <% } %>
+</div>
       </div>
 
       <% if (threads.length > 0) { %>
-        <div class="thread-list">
+        <div class="discussion-feed">
           <% threads.forEach(thread => { %>
-            <div class="thread-card">
-              <div class="thread-manga-info">
-                <img src="<%= thread.manga.coverImage %>" alt="<%= thread.manga.title %>">
-                <span><%= thread.manga.title %></span>
-              </div>
+            <article class="discussion-row">
               
-              <div class="thread-content">
-                <h3><a href="/discussions/<%= thread._id %>"><%= thread.title %></a></h3>
-                <p class="thread-excerpt"><%= thread.content.substring(0, 200) %>...</p>
-                
-                <div class="thread-meta">
-                  <span><i class="fas fa-user"></i> <%= thread.user.username %></span>
-                  <span><i class="fas fa-clock"></i> <%= new Date(thread.createdAt).toLocaleDateString() %></span>
-                  <span><i class="fas fa-eye"></i> <%= thread.views %> views</span>
-                  <span><i class="fas fa-comments"></i> <%= thread.replies.length %> replies</span>
+              <div class="row-image">
+                <div class="img-frame">
+                  <img src="<%= thread.manga.coverImage %>" alt="<%= thread.manga.title %>">
+                  <div class="screentone-overlay"></div>
                 </div>
               </div>
-            </div>
+
+              <div class="row-content">
+                <div class="row-meta-top">
+                  <span class="tag-manga"><%= thread.manga.title %></span>
+                  <span class="tag-date"><i class="fas fa-clock"></i> <%= new Date(thread.createdAt).toLocaleDateString() %></span>
+                </div>
+
+                <h2 class="row-title">
+                  <a href="/discussions/<%= thread._id %>"><%= thread.title %></a>
+                </h2>
+
+                <p class="row-excerpt"><%= thread.content.substring(0, 180) %>...</p>
+
+                <div class="row-meta-bottom">
+                  <div class="user-info">
+                    <i class="fas fa-user-astronaut"></i> <span><%= thread.user.username %></span>
+                  </div>
+                  <div class="stats">
+                    <span><i class="fas fa-eye"></i> <%= thread.views %></span>
+                    <span><i class="fas fa-comment-alt"></i> <%= thread.replies.length %></span>
+                  </div>
+                </div>
+                
+                <div class="corner-accents"></div>
+              </div>
+
+            </article>
           <% }) %>
         </div>
       <% } else { %>
-        <div class="empty-state">
-          <i class="fas fa-comments"></i>
-          <h2>No discussions yet</h2>
-          <p>Be the first to start a conversation!</p>
+        <div class="empty-state-cyber">
+          <div class="glitch-icon"><i class="fas fa-comments"></i></div>
+          <h2>NO SIGNALS DETECTED</h2>
+          <p>Be the first to transmit a frequency.</p>
           <% if (currentUser) { %>
-            <a href="/discussions/create" class="btn btn-primary">
-              Create Discussion
-            </a>
+            <a href="/discussions/create" class="btn btn-primary">Initialize Thread</a>
           <% } %>
         </div>
       <% } %>
@@ -70,7 +111,6 @@
   </main>
 
   <%- include('../partials/footer') %>
-  
   <script src="/js/main.js"></script>
 </body>
 </html>

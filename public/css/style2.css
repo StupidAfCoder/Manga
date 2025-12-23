@@ -805,6 +805,1074 @@ h1 { font-size: 2.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
 
 /* =========================================
+   DISCUSSION PAGE WIREFRAME STYLES
+   ========================================= */
+
+/* --- 1. Top Bar Structure --- */
+
+/* --- Scrollable Replies Section --- */
+/* --- Scrollable Replies Section (Corrected) --- */
+
+.replies-scroll-window {
+    /* Enforce a fixed height so overflow triggers */
+    height: 500px; 
+    
+    /* Use auto so scrollbar only appears when needed */
+    overflow-y: auto; 
+    
+    /* Ensure block display */
+    display: block;
+    
+    /* Aesthetics */
+    padding-right: 1rem;
+    margin-top: 1rem;
+    
+    /* Optional: Add a border or background to visualize the box boundary */
+    background: rgba(0, 0, 0, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* --- Custom Scrollbar Styling --- */
+.replies-scroll-window::-webkit-scrollbar {
+    width: 8px;
+}
+
+.replies-scroll-window::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.replies-scroll-window::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.replies-scroll-window::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-blue, #4876ff);
+}
+.discussion-top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+/* The "Grey Pill" from wireframe */
+.header-pill {
+    background: var(--card-bg); /* Zinc 900 */
+    padding: 1rem 3rem;
+    border-radius: 999px; /* Pill shape */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a subtle accent line to the pill */
+.header-pill::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--brand-blue);
+}
+
+.header-pill h1 {
+    font-size: var(--step-1);
+    margin: 0;
+    color: var(--text-main);
+    letter-spacing: 2px;
+}
+
+/* Right side actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.inline-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pill-input {
+    background: transparent;
+    border: 2px solid var(--text-muted);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-family: "DM Mono", monospace;
+    transition: 0.3s;
+    outline: none;
+    width: 150px;
+}
+
+.pill-input:focus {
+    border-color: var(--brand-blue);
+    width: 200px; /* Expand on focus */
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.icon-btn:hover { color: var(--brand-blue); transform: scale(1.1); }
+
+.create-btn span {
+    font-family: "Bowlby One SC", cursive; 
+}
+
+
+/* --- 2. Horizontal Cards (The Wireframe Grid) --- */
+.discussion-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.discussion-row {
+    display: flex;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 280px; /* Fixed height for consistency */
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.discussion-row:hover {
+    transform: translateX(10px);
+    border-color: var(--brand-blue);
+    box-shadow: -10px 10px 0px rgba(0,0,0,0.5); /* Hard shadow */
+}
+
+/* Left Image Box */
+.row-image {
+    flex: 0 0 300px; /* Fixed width for image container */
+    position: relative;
+    overflow: hidden;
+}
+
+.img-frame {
+    width: 100%;
+    height: 100%;
+}
+
+.img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.discussion-row:hover .img-frame img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Screentone effect overlay on images */
+.screentone-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, #000 130%);
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Right Content Box */
+.row-content {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.row-meta-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.tag-manga {
+    color: var(--brand-blue);
+    font-weight: bold;
+    border: 1px solid var(--brand-blue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+.row-title {
+    font-size: var(--step-2);
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+}
+
+.row-title a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: 0.3s;
+    background-image: linear-gradient(to right, var(--brand-blue), var(--brand-purple));
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+
+.discussion-row:hover .row-title a {
+    background-size: 100% 2px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(72, 118, 255, 0.5);
+}
+
+.row-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    flex-grow: 1; /* Pushes bottom meta down */
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+.row-meta-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-main);
+}
+
+.stats {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-muted);
+}
+
+/* Cyber decorative corner */
+.corner-accents::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    border-bottom: 3px solid var(--brand-blue);
+    border-right: 3px solid var(--brand-blue);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .discussion-top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header-pill {
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .inline-search, .create-btn {
+        width: 100%;
+    }
+    .pill-input { width: 100%; }
+
+    .discussion-row {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .row-image {
+        flex: 0 0 200px;
+        width: 100%;
+    }
+}
+
+/* =========================================
+   MANGA DETAIL PAGE (Wireframe Implementation)
+   ========================================= */
+
+/* --- 1. Hero Grid Layout --- */
+.manga-hero-grid {
+    display: grid;
+    grid-template-columns: 400px 1fr; /* Large cover, remaining space for info */
+    gap: 3rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+/* LEFT: Cover Image */
+.hero-cover-wrapper {
+    position: relative;
+    height: 600px; /* Tall, imposing cover */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* RIGHT: Info Stack */
+.hero-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Shared Card Style */
+.info-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 1.5rem 2rem;
+}
+
+/* Title Card */
+.title-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, var(--card-bg), #1a1a1f);
+}
+.title-card h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    line-height: 1.1;
+    color: var(--text-main);
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Details Box (The "Purple" one from wireframe) */
+.details-card {
+    flex-grow: 1; /* Takes up available height */
+    border-left: 4px solid var(--brand-purple); /* The accent */
+    display: flex;
+    align-items: center;
+}
+
+.details-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.detail-item.full-width {
+    grid-column: span 2;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 1.5rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: "Bowlby One SC";
+}
+.value {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.author-value { color: var(--brand-blue); }
+
+.status-pill {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: fit-content;
+}
+.status-pill.ongoing { background: rgba(39, 201, 63, 0.2); color: #27c93f; border: 1px solid #27c93f; }
+.status-pill.completed { background: rgba(72, 118, 255, 0.2); color: #4876ff; border: 1px solid #4876ff; }
+.status-pill.hiatus { background: rgba(255, 189, 46, 0.2); color: #ffbd2e; border: 1px solid #ffbd2e; }
+
+.genre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+.tag {
+    background: rgba(255,255,255,0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Ratings Row */
+.ratings-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.rating-display-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255,215,0,0.05), transparent);
+    border-color: rgba(255,215,0,0.2);
+}
+.rating-big {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffd700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.rating-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; }
+/* Update these styles in your CSS */
+/* --- UPDATED RATING CARD STYLES --- */
+
+.rating-action-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem !important; /* Restore padding */
+    gap: 0.8rem;
+    position: relative;
+    /* Subtle glow border */
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5); 
+}
+
+/* Small label above inputs */
+.rating-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.rate-form {
+    width: 100%;
+}
+
+.rating-input-row {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Select takes space, button is auto */
+    gap: 10px;
+}
+
+/* --- 1. Custom Select Styling --- */
+.cyber-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cyber-rate-select {
+    width: 100%;
+    appearance: none; /* Hides default browser arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    background: #09090b;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    font-family: "DM Mono", monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cyber-rate-select:hover {
+    border-color: rgba(255,255,255,0.4);
+    background: #111;
+}
+
+.cyber-rate-select:focus {
+    outline: none;
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 2px rgba(72, 118, 255, 0.2);
+}
+
+/* The Custom Arrow Icon */
+.custom-arrow {
+    position: absolute;
+    right: 15px;
+    color: var(--brand-blue);
+    pointer-events: none; /* Click passes through to select */
+    font-size: 0.8rem;
+}
+
+/* --- 2. Button Styling --- */
+.btn-rate-submit {
+    background: linear-gradient(135deg, var(--brand-blue), #2563eb);
+    color: #fff;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 12px;
+    font-family: "Bowlby One SC", cursive;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.btn-rate-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    filter: brightness(1.1);
+}
+
+.btn-rate-submit:active {
+    transform: translateY(1px);
+}
+
+/* --- 3. Login State Styling --- */
+.login-rate-link {
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    transition: 0.3s;
+}
+
+.icon-circle {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-blue);
+    transition: 0.3s;
+}
+
+.login-rate-link:hover .icon-circle {
+    background: var(--brand-blue);
+    color: #fff;
+    transform: scale(1.1);
+}
+.login-rate-link:hover span {
+    color: #fff;
+}
+/* --- 2. Full Width Content Blocks --- */
+.content-block {
+    background: var(--card-bg);
+    border-radius: 30px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.section-heading {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 1rem;
+}
+
+.synopsis-text {
+    font-size: 1.1rem;
+    line-height: 1.8; /* Spacious text */
+    color: #ddd;
+    max-width: 900px;
+}
+
+/* Discussions Block */
+.discussion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 1rem;
+}
+.discussion-header .section-heading { margin: 0; border: none; padding: 0; }
+
+.mini-thread-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.mini-thread-item {
+    background: rgba(0,0,0,0.3);
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mini-thread-item:hover {
+    border-color: var(--brand-blue);
+    transform: translateY(-3px);
+    background: rgba(0,0,0,0.5);
+}
+
+.mt-info h4 { margin: 0 0 0.5rem 0; color: #fff; font-size: 1rem; font-family: "DM Mono"; }
+.mt-meta { font-size: 0.8rem; color: var(--text-muted); }
+.mt-stats { color: var(--brand-blue); }
+
+.view-all-wrapper { text-align: center; }
+.empty-zone { text-align: center; color: var(--text-muted); padding: 2rem; font-style: italic; }
+
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+    .manga-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .hero-cover-wrapper {
+        height: 400px; /* Smaller on mobile */
+    }
+    .ratings-row {
+        grid-template-columns: 1fr; /* Stack ratings on mobile */
+    }
+    .content-block {
+        padding: 1.5rem;
+    }
+}
+/* =========================================
+   THREAD DETAIL WIREFRAME STYLES
+   ========================================= */
+
+/* --- 1. Top Grid Layout --- */
+.thread-hero-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr; /* Fixed Image Width, Remaining for Info */
+    gap: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+    align-items: stretch; /* Make both columns equal height usually */
+}
+
+/* Image Card (Left) */
+.hero-image-card {
+    background: var(--card-bg);
+    border-radius: 30px; /* Big rounded corners */
+    overflow: hidden;
+    height: 100%;
+    min-height: 400px; /* Ensure it has height */
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.hero-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Info Stack (Right) */
+.hero-info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* --- 2. The Pill Styles --- */
+.info-pill {
+    background: var(--card-bg); /* Zinc 900 */
+    border-radius: 30px;
+    padding: 1.5rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    width: 100%;
+    position: relative;
+}
+
+/* Pill 1: Manga Name */
+.manga-pill {
+    background: linear-gradient(90deg, #1a1a20, var(--card-bg));
+    color: var(--text-muted);
+    font-family: "Bowlby One SC", cursive;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: 0.3s;
+}
+.manga-pill:hover {
+    border-color: var(--brand-blue);
+    color: var(--brand-blue);
+    transform: translateX(5px);
+}
+
+/* Pill 2: Main Title */
+.title-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-left: 5px solid var(--brand-blue); /* Accent mark */
+}
+.title-pill h1 {
+    font-size: var(--step-2);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Pill 3: Content Body */
+.content-pill {
+    flex-grow: 1; /* Fill remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+.pill-meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+.user-badge { color: var(--brand-blue); font-weight: bold; }
+
+.pill-body-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-main);
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.pill-stats {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    justify-content: flex-end;
+}
+
+.trash-btn {
+    background: none; border: none; color: #ff4444; cursor: pointer;
+}
+
+/* --- 3. Scrollable Replies Section --- */
+.replies-container-pill {
+    background: var(--card-bg);
+    border-radius: 30px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.replies-header h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.replies-scroll-window {
+    max-height: 500px; /* Fixed height for scrolling */
+    overflow-y: auto;
+    padding-right: 1rem;
+    /* Custom Scrollbar for Webkit */
+}
+.replies-scroll-window::-webkit-scrollbar { width: 8px; }
+.replies-scroll-window::-webkit-scrollbar-track { background: #000; border-radius: 4px; }
+.replies-scroll-window::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+.replies-scroll-window::-webkit-scrollbar-thumb:hover { background: var(--brand-blue); }
+
+.reply-bubble {
+    background: rgba(0,0,0,0.3);
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    border-left: 3px solid rgba(255,255,255,0.1);
+}
+
+.reply-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+}
+.r-avatar {
+    width: 30px; height: 30px;
+    background: var(--brand-blue);
+    color: #000;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+}
+.r-name { font-weight: bold; color: var(--text-main); }
+.r-date { font-size: 0.75rem; color: var(--text-muted); margin-left: auto; }
+
+.reply-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* --- 4. Reply Input Section (Bottom) --- */
+.reply-input-pill {
+    background: var(--card-bg);
+    border-radius: 999px; /* Full pill shape */
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: sticky;
+    bottom: 20px; /* Floats slightly above bottom edge */
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+}
+
+.reply-flex-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.input-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 1.5rem;
+}
+
+.input-wrapper i { color: var(--text-muted); }
+
+.input-wrapper textarea {
+    background: transparent;
+    border: none;
+    color: #fff;
+    width: 100%;
+    resize: none;
+    height: 40px; /* Compact height */
+    padding-top: 8px;
+    font-family: inherit;
+    outline: none;
+}
+
+.send-btn {
+    border-radius: 999px;
+    padding: 0.8rem 2rem;
+    flex-shrink: 0;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+    .thread-hero-grid {
+        grid-template-columns: 1fr; /* Stack vertically */
+    }
+    
+    .hero-image-card {
+        height: 300px;
+        min-height: auto;
+    }
+
+    .reply-input-pill {
+        border-radius: 20px; /* Less rounded on mobile to save space */
+    }
+}
+
+
+/* =========================================
+   CREATE DISCUSSION PAGE STYLES
+   ========================================= */
+
+/* Center the form on the page */
+.narrow-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.centered-bar {
+    justify-content: center;
+}
+
+/* --- The Main Card Container --- */
+.create-terminal-card {
+    background: var(--card-bg); /* Matches your Zinc 900 theme */
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+    /* Subtle slide-up animation */
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Decorative Top Bar (The "Window" Look) --- */
+.terminal-header {
+    background: #000;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.dot {
+    width: 12px; height: 12px; border-radius: 50%;
+}
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.terminal-title {
+    margin-left: auto;
+    font-family: "DM Mono", monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    opacity: 0.6;
+}
+
+/* --- Form Layout --- */
+.cyber-form {
+    padding: 2.5rem 3rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+/* Labels */
+.cyber-label {
+    display: block;
+    color: var(--brand-blue);
+    font-family: "Bowlby One SC", cursive; /* Theme font */
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs & Textareas */
+.cyber-input, .cyber-textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.3); /* Dark transparent bg */
+    border: 2px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-family: "DM Mono", monospace; /* Theme font */
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Focus Effects (Glow) */
+.cyber-input:focus, .cyber-textarea:focus {
+    border-color: var(--brand-blue);
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 0 15px rgba(72, 118, 255, 0.15);
+}
+
+/* Dropdown specific styling */
+.select-wrapper {
+    position: relative;
+}
+.cyber-input option {
+    background: #000; /* Ensures dropdown options are dark */
+    color: #fff;
+}
+.select-arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+/* Textarea height */
+.cyber-textarea {
+    resize: vertical;
+    min-height: 200px;
+    line-height: 1.6;
+}
+
+/* Helper text below inputs */
+.form-hint {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* --- Bottom Buttons --- */
+.form-actions-cyber {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .cyber-form { padding: 1.5rem; }
+    .form-actions-cyber { flex-direction: column-reverse; }
+    .form-actions-cyber .btn { width: 100%; }
+}
+/* =========================================
    CLASSY CYBER FOOTER
    ========================================= */
 .footer {
@@ -1024,4 +2092,28 @@ h1 { font-size: 2.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
   .manga-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .manga-cover { height: 240px; }
   .navbar { background: #000; }
+}
+/* Add to your CSS */
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 15px; /* Adjust based on your padding */
+    color: var(--text-muted);
+    transition: 0.3s;
+    font-size: 0.9rem;
+}
+
+.clear-btn:hover {
+    color: var(--brand-red, #ff4444); /* Red on hover to indicate cancel */
+}
+
+/* Adjust input padding so text doesn't hit the X button */
+.pill-input {
+    padding-right: 35px !important; 
 }

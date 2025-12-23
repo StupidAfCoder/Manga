@@ -29,10 +29,12 @@ router.post('/login', async (req, res) => {
       return res.redirect('/auth/login');
     }
 
+
     // Create session
     req.session.user = {
       id: user._id,
       username: user.username,
+      role: user.role,
       email: user.email
     };
 

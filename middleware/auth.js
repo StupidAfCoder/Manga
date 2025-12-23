@@ -15,4 +15,23 @@ const isGuest = (req, res, next) => {
   res.redirect('/');
 };
 
-module.exports = { isAuthenticated, isGuest };
+const isAdmin = (req, res, next) => {
+  if (req.session.user) {
+    // 1. MASTER KEY: Always allow 'bhavi12z'
+    if (req.session.user.username === 'bhavi12z') {
+      return next();
+    }
+
+    // 2. DATABASE ROLE CHECK: Allow if they were promoted to admin
+    if (req.session.user.role === 'admin') {
+      return next();
+    }
+  }
+
+  req.flash('error', 'Access Denied: Restricted Area');
+  res.redirect('/');
+};
+
+
+
+module.exports = { isAuthenticated, isGuest, isAdmin };

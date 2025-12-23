@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Manga | Admin Console</title>
+  <link rel="stylesheet" href="/css/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Admin Theme Overrides */
+    .admin-pill { border-color: #ff4444 !important; }
+    .admin-pill h1 { color: #ff4444 !important; }
+    .terminal-red { border-color: #ff4444 !important; }
+    .terminal-title-red { color: #ff4444 !important; }
+    .btn-admin { 
+      background: linear-gradient(90deg, #b91c1c, #ef4444); 
+      color: white; border: none; 
+    }
+    .btn-admin:hover { 
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); 
+      transform: translateY(-2px); 
+    }
+    /* Grid for smaller inputs */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    @media(max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <%- include('../partials/navbar') %>
+  
+  <main class="main-content">
+    <%- include('../partials/flash') %>
+    
+    <div class="container narrow-container">
+      <div class="discussion-top-bar centered-bar">
+        <div class="header-pill admin-pill">
+          <h1><i class="fas fa-database"></i> INJECT NEW MANGA DATA</h1>
+        </div>
+      </div>
+
+      <div class="create-terminal-card terminal-red">
+        <div class="terminal-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="terminal-title terminal-title-red">ROOT/DATABASE/INSERT_RECORD</span>
+        </div>
+
+        <form action="/admin/addmanga" method="POST" class="cyber-form">
+          
+          <div class="form-group">
+            <label class="cyber-label">Title & Author</label>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <input type="text" name="title" required class="cyber-input" placeholder="Manga Title">
+                <input type="text" name="author" required class="cyber-input" placeholder="Author Name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="cyber-label">Cover Image URL</label>
+            <input type="url" name="coverImage" required class="cyber-input" placeholder="https://example.com/image.jpg">
+          </div>
+
+          <div class="form-group">
+            <label class="cyber-label">Manga Details</label>
+            <div class="form-row">
+                <div class="select-wrapper">
+                    <select name="status" class="cyber-input">
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Hiatus">Hiatus</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-arrow"></i>
+                </div>
+
+                <input type="number" name="chapters" class="cyber-input" placeholder="Total Chapters" min="0">
+
+                <input type="number" name="yearPublished" class="cyber-input" placeholder="Year (e.g. 2023)" min="1950">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="cyber-label">Genres</label>
+            <input type="text" name="genres" required class="cyber-input" placeholder="Action, Adventure, Fantasy (Comma separated)">
+          </div>
+
+          <div class="form-group">
+            <label class="cyber-label">Synopsis</label>
+            <textarea name="description" required rows="5" class="cyber-textarea" placeholder="Enter manga description..."></textarea>
+          </div>
+
+          <div class="form-actions-cyber">
+            <a href="/admin/manageusers" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-admin btn-large">
+              UPLOAD TO DATABASE <i class="fas fa-upload"></i>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+  <%- include('../partials/footer') %>
+</body>
+</html>

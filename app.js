@@ -20,14 +20,18 @@ mongoose.connect(MONGODB_URI)
     console.log('✅ Connected to MongoDB');
     
     // Auto-seed database if empty
-    const Manga = require('./models/Manga');
-    const mangaCount = await Manga.countDocuments();
-    
-    if (mangaCount === 0) {
-      console.log('📦 Database is empty, seeding initial data...');
-      const seedDatabase = require('./config/autoSeed');
-      await seedDatabase();
-      console.log('✅ Database seeded successfully');
+    try {
+      const Manga = require('./models/Manga');
+      const mangaCount = await Manga.countDocuments();
+      
+      if (mangaCount === 0) {
+        console.log('📦 Database is empty, seeding initial data...');
+        const seedDatabase = require('./config/autoSeed');
+        await seedDatabase();
+        console.log('✅ Database seeded successfully');
+      }
+    } catch (seedErr) {
+      console.log('⚠️ Auto-seed check failed (ignoring):', seedErr.message);
     }
   })
   .catch(err => {
@@ -68,13 +72,21 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
+// ==========================================
+// ✅ ROUTES
+// ==========================================
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/manga', require('./routes/manga'));
 app.use('/discussions', require('./routes/discussions'));
 
-// 404 Handler
+// Admin Routes (Moved UP so it is reachable)
+const adminRoutes = require('./routes/admin'); 
+app.use('/admin', adminRoutes);
+
+// ==========================================
+// ⛔ 404 Handler (Must be AFTER all routes)
+// ==========================================
 app.use((req, res) => {
   res.status(404).render('404', { 
     title: 'Page Not Found',

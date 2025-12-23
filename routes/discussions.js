@@ -5,9 +5,32 @@ const Manga = require('../models/Manga');
 const { isAuthenticated } = require('../middleware/auth');
 
 // GET /discussions - List all discussion threads
+// GET /discussions - List all discussion threads with Search
+// GET /discussions - List all threads (Search by Title, Content, or Manga Name)
 router.get('/', async (req, res) => {
   try {
-    const threads = await Thread.find()
+    const { search } = req.query;
+    let dbQuery = {};
+
+    if (search) {
+      const safeSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(safeSearch, 'i'); // Case-insensitive regex
+
+      // STEP 1: Find any Manga that matches the search name
+      const matchingMangas = await Manga.find({ title: regex }).select('_id');
+      const matchingMangaIds = matchingMangas.map(m => m._id);
+
+      // STEP 2: Find Threads that match Title OR Content OR the Found Manga IDs
+      dbQuery = {
+        $or: [
+          { title: regex },                  // Match Thread Title
+          { content: regex },                // Match Thread Content
+          { manga: { $in: matchingMangaIds } } // Match Manga Name
+        ]
+      };
+    }
+
+    const threads = await Thread.find(dbQuery)
       .populate('user', 'username')
       .populate('manga', 'title coverImage')
       .sort({ updatedAt: -1 })
@@ -15,11 +38,17 @@ router.get('/', async (req, res) => {
 
     res.render('discussions/list', { 
       title: 'Discussions',
-      threads
+      threads,
+      search: search || '' 
     });
+
   } catch (error) {
     console.error(error);
-    res.render('discussions/list', { title: 'Discussions', threads: [] });
+    res.render('discussions/list', { 
+      title: 'Discussions', 
+      threads: [], 
+      search: '' 
+    });
   }
 });
 
@@ -148,5 +177,6 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
     res.redirect('/discussions');
   }
 });
+
 
 module.exports = router;
