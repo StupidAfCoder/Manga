@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
+  // NEW: Role field to manage Admin access
+  role: {
+    type: String,
+    enum: ['user', 'admin'], // Only allows these two values
+    default: 'user'          // Everyone starts as a normal user
+  },
   createdAt: {
     type: Date,
     default: Date.now

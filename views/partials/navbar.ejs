@@ -23,6 +23,15 @@
         <div class="search-suggestions" role="listbox" aria-hidden="true"></div>
       </form>
 
+      <% if (currentUser && (currentUser.role === 'admin' || currentUser.username === 'bhavi12z')) { %>
+    <a href="/admin/manageusers" class="btn btn-outline" style="border-color: #ff4444; color: #ff4444; margin-right: 10px;">
+      <i class="fas fa-shield-alt"></i> Admin Panel
+    </a>
+  <% } %>
+
+  <% if (currentUser) { %>
+    <% } %>
+
       <!-- User Menu (show only username and logout in one row) -->
       <% if (currentUser) { %>
         <div class="user-area">
