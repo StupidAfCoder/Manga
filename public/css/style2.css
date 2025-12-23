@@ -805,6 +805,273 @@ h1 { font-size: 2.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
 
 /* =========================================
+   DISCUSSION PAGE WIREFRAME STYLES
+   ========================================= */
+
+/* --- 1. Top Bar Structure --- */
+.discussion-top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+/* The "Grey Pill" from wireframe */
+.header-pill {
+    background: var(--card-bg); /* Zinc 900 */
+    padding: 1rem 3rem;
+    border-radius: 999px; /* Pill shape */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a subtle accent line to the pill */
+.header-pill::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--brand-blue);
+}
+
+.header-pill h1 {
+    font-size: var(--step-1);
+    margin: 0;
+    color: var(--text-main);
+    letter-spacing: 2px;
+}
+
+/* Right side actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.inline-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pill-input {
+    background: transparent;
+    border: 2px solid var(--text-muted);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-family: "DM Mono", monospace;
+    transition: 0.3s;
+    outline: none;
+    width: 150px;
+}
+
+.pill-input:focus {
+    border-color: var(--brand-blue);
+    width: 200px; /* Expand on focus */
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.icon-btn:hover { color: var(--brand-blue); transform: scale(1.1); }
+
+.create-btn span {
+    font-family: "Bowlby One SC", cursive; 
+}
+
+
+/* --- 2. Horizontal Cards (The Wireframe Grid) --- */
+.discussion-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.discussion-row {
+    display: flex;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 280px; /* Fixed height for consistency */
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.discussion-row:hover {
+    transform: translateX(10px);
+    border-color: var(--brand-blue);
+    box-shadow: -10px 10px 0px rgba(0,0,0,0.5); /* Hard shadow */
+}
+
+/* Left Image Box */
+.row-image {
+    flex: 0 0 300px; /* Fixed width for image container */
+    position: relative;
+    overflow: hidden;
+}
+
+.img-frame {
+    width: 100%;
+    height: 100%;
+}
+
+.img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.discussion-row:hover .img-frame img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Screentone effect overlay on images */
+.screentone-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, #000 130%);
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Right Content Box */
+.row-content {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.row-meta-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.tag-manga {
+    color: var(--brand-blue);
+    font-weight: bold;
+    border: 1px solid var(--brand-blue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+.row-title {
+    font-size: var(--step-2);
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+}
+
+.row-title a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: 0.3s;
+    background-image: linear-gradient(to right, var(--brand-blue), var(--brand-purple));
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+
+.discussion-row:hover .row-title a {
+    background-size: 100% 2px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(72, 118, 255, 0.5);
+}
+
+.row-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    flex-grow: 1; /* Pushes bottom meta down */
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+.row-meta-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-main);
+}
+
+.stats {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-muted);
+}
+
+/* Cyber decorative corner */
+.corner-accents::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    border-bottom: 3px solid var(--brand-blue);
+    border-right: 3px solid var(--brand-blue);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .discussion-top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header-pill {
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .inline-search, .create-btn {
+        width: 100%;
+    }
+    .pill-input { width: 100%; }
+
+    .discussion-row {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .row-image {
+        flex: 0 0 200px;
+        width: 100%;
+    }
+}
+/* =========================================
    CLASSY CYBER FOOTER
    ========================================= */
 .footer {
@@ -1024,4 +1291,28 @@ h1 { font-size: 2.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
   .manga-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .manga-cover { height: 240px; }
   .navbar { background: #000; }
+}
+/* Add to your CSS */
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 15px; /* Adjust based on your padding */
+    color: var(--text-muted);
+    transition: 0.3s;
+    font-size: 0.9rem;
+}
+
+.clear-btn:hover {
+    color: var(--brand-red, #ff4444); /* Red on hover to indicate cancel */
+}
+
+/* Adjust input padding so text doesn't hit the X button */
+.pill-input {
+    padding-right: 35px !important; 
 }
