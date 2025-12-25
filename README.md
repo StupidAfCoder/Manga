@@ -1,642 +1,127 @@
-# MangaVerse 📚
 
-A minimalist full-stack manga discovery and discussion platform built with Node.js, Express, MongoDB, and EJS.
+# MangaVerse
 
----
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Node.js](https://img.shields.io/badge/Node.js-v18-green)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-4.18-black)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Database-green)](https://www.mongodb.com/)
 
-## 🎯 Overview
+**Live Deployment:** [https://mangaverse-1-vrri.onrender.com/]
 
-**MangaVerse** is a comprehensive manga platform featuring:
-- Browse and search manga with real-time filtering
-- Rate manga (1-5 stars) with auto-calculation
-- Create and participate in discussion threads
-- Discover trending and top-rated manga
-- Auto-populated database on first startup
-- Minimalist Gruvbox UI with smooth animations
+## Project Overview
 
----
+MangaVerse is a full-stack web application designed for anime and manga enthusiasts. The platform serves as a comprehensive hub where users can access detailed information about manga titles, participate in community ratings, and engage in live discussions through dedicated threads. The application aims to foster a collaborative environment for content consumption and critique.
 
-## 🚀 Quick Start
+![Application Dashboard](public/images/dashboard.png)
+*Figure 1: Application Dashboard*
+
+
+## Key Features
+
+* **Manga Information Catalog:** Detailed views for various manga titles, including synopses and metadata.
+* **User Rating System:** Interactive feature allowing authenticated users to rate and review specific titles.
+* **Discussion Forums:** Live discussion threads enabling real-time community interaction and debate regarding favorite series.
+* **User Authentication:** Secure registration and login functionality using encryption standards.
+* **Responsive Design:** Optimized for viewing on various device sizes.
+
+## Technical Architecture
+
+This project utilizes a Model-View-Controller (MVC) architectural pattern.
+
+### Tech Stack
+
+* **Runtime Environment:** Node.js
+* **Framework:** Express.js
+* **Database:** MongoDB (via Mongoose ODM)
+* **Templating Engine:** EJS (Embedded JavaScript)
+* **Authentication:** bcryptjs (Hashing), express-session (Session management)
+* **Styling:** CSS (served via Static files)
+* **Deployment:** Render
+
+### Project Structure
+
+```text
+Mangaverse/
+├── config/              # Configuration files (Database connection, Seeding)
+├── middleware/          # Custom middleware (Authentication checks)
+├── models/              # Mongoose database schemas
+├── public/              # Static assets (CSS, Client-side JS, Images)
+├── routes/              # Express route definitions
+├── views/               # EJS template files
+├── .env                 # Environment variables (Gitignored)
+├── app.js               # Application entry point
+├── render.yaml          # Render deployment configuration
+└── package.json         # Project dependencies and scripts
+
+```
+
+## Installation & Setup
+
+Follow these steps to set up the project locally.
 
 ### Prerequisites
-- **Node.js** (v14+) - [Download](https://nodejs.org/)
-- **MongoDB** (local) - [Install Guide](https://www.mongodb.com/docs/manual/installation/)
 
-### Installation
+* Node.js (v14 or higher)
+* npm (Node Package Manager)
+* MongoDB Atlas URI or local MongoDB instance
+
+### Step 1: Clone the Repository
 
 ```bash
-# Clone repository
-git clone https://github.com/StupidAfCoder/Manga.git
-cd Manga
-
-# Install dependencies
-npm install
-
-# Start MongoDB
-sudo systemctl start mongodb  # Linux
-brew services start mongodb-community  # macOS
-
-# Start server (auto-seeds on first run)
-npm run dev
-```
-
-**Access:** http://localhost:3000
-
-**Test Login:**
-- Username: `admin`
-- Password: `admin123`
-
----
-
-## 🚀 Features
-
-### 1. **User Authentication**
-- Secure user registration and login
-- Password hashing with bcrypt
-- Session-based authentication
-- Protected routes for authenticated users
-
-### 2. **Manga Catalog**
-- Browse comprehensive manga collection
-- Search functionality with text indexing
-- Filter by genre, status (ongoing/completed/hiatus)
-- Detailed manga information pages
-- View count tracking
-
-### 3. **Rating System**
-- Interactive 5-star rating component
-- Real-time rating updates
-- Average rating calculation
-- User-specific rating tracking
-- Visual rating feedback
-
-### 4. **Discussion Forums**
-- Create discussion threads for specific manga
-- Threaded replies system
-- Author-only thread deletion
-- Timestamp tracking for posts
-- Rich discussion participation
-
-### 5. **Trending & Top-Rated**
-- Trending manga based on view count
-- Top-rated manga leaderboard
-- Time-based filtering options
-- Dynamic ranking system
-
----
-
-## 🛠️ Technology Stack
-
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web application framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB object modeling
-
-### Frontend
-- **EJS** - Embedded JavaScript templating
-- **CSS3** - Modern responsive styling
-- **JavaScript (ES6+)** - Client-side interactivity
-- **Font Awesome** - Icon library
-
-### Development Tools
-- **Nodemon** - Auto-restart development server
-- **dotenv** - Environment variable management
-- **bcryptjs** - Password hashing
-- **express-session** - Session management
-- **connect-flash** - Flash message middleware
-- **method-override** - HTTP verb support (DELETE, PUT)
-
----
-
-## 📁 Project Structure
+git clone [https://github.com/your-username/mangaverse.git](https://github.com/your-username/mangaverse.git)
+cd mangaverse
 
 ```
-Animeverse/
-├── app.js                      # Main application entry point
-├── package.json                # Project dependencies
-├── .env                        # Environment variables
-├── .gitignore                  # Git ignore rules
-│
-├── config/
-│   ├── database.js             # MongoDB connection setup
-│   └── seed.js                 # Database seed script
-│
-├── models/
-│   ├── User.js                 # User schema with authentication
-│   ├── Manga.js                # Manga schema with ratings
-│   ├── Rating.js               # User-manga rating relationship
-│   └── Thread.js               # Discussion thread schema
-│
-├── middleware/
-│   └── auth.js                 # Authentication middleware
-│
-├── routes/
-│   ├── auth.js                 # Authentication routes
-│   ├── manga.js                # Manga CRUD routes
-│   ├── discussions.js          # Discussion forum routes
-│   └── index.js                # Home, search, trending routes
-│
-├── views/
-│   ├── partials/
-│   │   ├── navbar.ejs          # Navigation bar
-│   │   ├── footer.ejs          # Footer component
-│   │   └── flash.ejs           # Flash messages
-│   ├── auth/
-│   │   ├── login.ejs           # Login page
-│   │   └── signup.ejs          # Registration page
-│   ├── manga/
-│   │   ├── list.ejs            # Manga listing page
-│   │   └── detail.ejs          # Manga detail with ratings
-│   ├── discussions/
-│   │   ├── list.ejs            # Discussion threads list
-│   │   ├── create.ejs          # Create discussion form
-│   │   └── detail.ejs          # Thread with replies
-│   ├── index.ejs               # Homepage
-│   ├── trending.ejs            # Trending manga page
-│   ├── top-rated.ejs           # Top-rated manga page
-│   ├── search.ejs              # Search results page
-│   ├── 404.ejs                 # 404 error page
-│   └── error.ejs               # Generic error page
-│
-└── public/
-    ├── css/
-    │   └── style.css           # Main stylesheet
-    └── js/
-        ├── main.js             # Core JavaScript functionality
-        └── rating.js           # Rating system logic
-```
 
----
+### Step 2: Install Dependencies
 
-## 📊 Database Schema (MongoDB CRUD Operations)
-
-### 1. **User Collection**
-```javascript
-{
-  username: String,          // Unique username
-  email: String,             // Unique email
-  password: String,          // Bcrypt hashed password
-  createdAt: Date           // Registration timestamp
-}
-```
-
-**CRUD Operations:**
-- **CREATE**: User signup (`POST /auth/signup`)
-- **READ**: Login validation, user info display
-- **UPDATE**: (Future: profile updates)
-- **DELETE**: (Future: account deletion)
-
-### 2. **Manga Collection**
-```javascript
-{
-  title: String,            // Manga title
-  author: String,           // Author name
-  description: String,      // Synopsis
-  coverImage: String,       // Cover image URL
-  genres: [String],         // Array of genres
-  status: String,           // ongoing/completed/hiatus
-  chapters: Number,         // Total chapters
-  publicationYear: Number,  // Release year
-  averageRating: Number,    // Calculated average (0-5)
-  ratingCount: Number,      // Total ratings received
-  viewCount: Number         // Page view tracking
-}
-```
-
-**CRUD Operations:**
-- **CREATE**: Database seeding, admin manga addition
-- **READ**: Browse, search, detail pages
-- **UPDATE**: Rating updates, view count increment
-- **DELETE**: (Future: admin manga removal)
-
-### 3. **Rating Collection**
-```javascript
-{
-  manga: ObjectId,          // Reference to Manga
-  user: ObjectId,           // Reference to User
-  rating: Number,           // Rating value (1-5)
-  createdAt: Date,         // Rating timestamp
-  updatedAt: Date          // Last update timestamp
-}
-```
-
-**CRUD Operations:**
-- **CREATE**: First-time rating (`POST /manga/:id/rate`)
-- **READ**: Display user's current rating
-- **UPDATE**: Update existing rating (upsert pattern)
-- **DELETE**: (Future: remove rating)
-
-### 4. **Thread Collection**
-```javascript
-{
-  title: String,            // Thread title
-  content: String,          // Thread content
-  manga: ObjectId,          // Reference to Manga
-  author: ObjectId,         // Reference to User
-  replies: [{              // Embedded replies
-    content: String,
-    author: ObjectId,
-    createdAt: Date
-  }],
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-**CRUD Operations:**
-- **CREATE**: New thread (`POST /discussions/create`), add reply (`POST /discussions/:id/reply`)
-- **READ**: Thread list, thread detail with replies
-- **UPDATE**: Automatic `updatedAt` on new replies
-- **DELETE**: Thread deletion (`DELETE /discussions/:id`)
-
-## 🔧 Installation & Setup
-
-### Prerequisites
-- **Node.js** (v14 or higher) - [Download](https://nodejs.org/)
-- **MongoDB** (local installation) - [Install Guide](https://www.mongodb.com/docs/manual/installation/)
-- **npm** (comes with Node.js)
-
-### Step-by-Step Setup
-
-#### 1. Install MongoDB
-
-**Ubuntu/Debian:**
-```bash
-sudo apt-get install -y mongodb-org
-sudo systemctl start mongodb
-sudo systemctl enable mongodb  # Auto-start on boot
-```
-
-**macOS:**
-```bash
-brew tap mongodb/brew
-brew install mongodb-community
-brew services start mongodb-community
-```
-
-**Windows:**
-- Download installer from [MongoDB Download Center](https://www.mongodb.com/try/download/community)
-- Run installer and install as Windows Service
-
-**Verify MongoDB is running:**
-```bash
-# Check status
-sudo systemctl status mongodb  # Linux
-brew services list  # macOS
-
-# Or try connecting
-mongosh  # Should connect without errors
-```
-
-#### 2. Clone Repository
-```bash
-git clone <repository-url>
-cd Animeverse
-```
-
-#### 3. Install Dependencies
 ```bash
 npm install
+
 ```
 
-#### 4. Configure Environment
-```bash
-# Copy environment template
-cp .env.example .env
+### Step 3: Environment Configuration
 
-# The default .env works for local setup, but you can customize:
-# - PORT (default: 3000)
-# - MONGODB_URI (default: mongodb://localhost:27017/mangaverse)
-# - SESSION_SECRET (change for production!)
+Create a `.env` file in the root directory. You must define the following variables for the application to function correctly:
+
+```env
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+SESSION_SECRET=your_secret_key
+
 ```
 
-#### 5. Seed Database
+### Step 4: Database Seeding (Optional)
+
+To populate the database with initial testing data, run the provided seed script:
+
 ```bash
 npm run seed
+
 ```
 
-This will create:
-- 4 sample users
-- 12 manga titles with Wikipedia cover images
-- Sample ratings and discussions
+### Step 5: Start the Application
 
-**Test Login Credentials:**
-- Username: `admin`
-- Password: `admin123`
+**For Development (with Nodemon):**
 
-#### 6. Start the Server
-
-**Development mode (with auto-reload):**
 ```bash
 npm run dev
+
 ```
 
-**Production mode:**
+**For Production:**
+
 ```bash
 npm start
+
 ```
 
-#### 7. Access the Application
+The server will initialize on `http://localhost:3000`.
 
-Open your browser and visit: **http://localhost:3000**
+## Deployment
 
----
+This application is configured for deployment on Render using the included `render.yaml` specification.
 
-### 🚨 Common Setup Issues
-
-#### Issue: "MongoDB connection error"
-**Solution:**
-```bash
-# Make sure MongoDB is running
-sudo systemctl start mongodb  # Linux
-brew services start mongodb-community  # macOS
-
-# Check if port 27017 is available
-netstat -an | grep 27017
-```
-
-#### Issue: "Port 3000 already in use"
-**Solution:**
-```bash
-# Kill existing process
-lsof -ti:3000 | xargs kill -9
-
-# Or change port in .env file
-PORT=3001
-```
-
-#### Issue: "npm install fails"
-**Solution:**
-```bash
-# Clear npm cache
-npm cache clean --force
-
-# Delete and reinstall
-rm -rf node_modules package-lock.json
-npm install
-```
-
-#### Issue: "Seed script fails"
-**Solution:**
-```bash
-# Make sure MongoDB is running first
-sudo systemctl status mongodb
-
-# Clear database and re-seed
-npm run seed
-```
-
----
-
-## 🎮 Usage Guide
-
-### For End Users
-
-1. **Browse Manga**
-   - Visit homepage to see featured manga
-   - Click "Browse All Manga" to view complete catalog
-   - Use search bar to find specific titles
-
-2. **Create Account**
-   - Click "Sign Up" in navigation
-   - Enter username, email, and password
-   - Login with credentials
-
-3. **Rate Manga**
-   - Click on any manga to view details
-   - Scroll to rating section
-   - Click stars to rate (1-5 stars)
-   - Submit rating (requires login)
-
-4. **Start Discussions**
-   - Navigate to manga detail page
-   - Click "Start Discussion"
-   - Enter title and content
-   - Submit to create thread
-
-5. **Reply to Threads**
-   - Open any discussion thread
-   - Scroll to reply form
-   - Enter your reply
-   - Submit to participate
-
----
-
-## 📝 API Routes
-
-### Authentication Routes (`/auth`)
-```
-GET  /auth/login         - Display login page
-POST /auth/login         - Process login
-GET  /auth/signup        - Display signup page
-POST /auth/signup        - Process registration
-POST /auth/logout        - Logout user
-```
-
-### Manga Routes (`/manga`)
-```
-GET  /manga              - List all manga
-GET  /manga/:id          - Manga detail page
-POST /manga/:id/rate     - Submit/update rating
-```
-
-### Discussion Routes (`/discussions`)
-```
-GET    /discussions              - List all threads
-GET    /discussions/create       - Create thread form
-POST   /discussions/create       - Process thread creation
-GET    /discussions/:id          - Thread detail with replies
-POST   /discussions/:id/reply    - Add reply to thread
-DELETE /discussions/:id          - Delete thread (author only)
-```
-
-### General Routes (`/`)
-```
-GET /                    - Homepage
-GET /trending            - Trending manga
-GET /top-rated           - Top-rated manga
-GET /search              - Search results
-```
-
----
-
-## 🧪 Testing for Viva/Demonstration
-
-### Feature Demonstration Checklist
-
-#### 1. **CRUD Operations** ✅
-
-**CREATE Operations:**
-- [ ] User registration (creates User document)
-- [ ] Manga rating submission (creates Rating document)
-- [ ] Discussion thread creation (creates Thread document)
-- [ ] Reply to thread (updates Thread with embedded reply)
-
-**READ Operations:**
-- [ ] View all manga (reads Manga collection)
-- [ ] Search manga (text search query)
-- [ ] View discussion threads (reads Thread collection)
-- [ ] Display user ratings (joins Rating with Manga)
-
-**UPDATE Operations:**
-- [ ] Update manga rating (upsert operation)
-- [ ] Increment view count (auto on manga detail page)
-- [ ] Update thread timestamp (auto on new reply)
-
-**DELETE Operations:**
-- [ ] Delete discussion thread (author-only deletion)
-
-#### 2. **Authentication Flow** ✅
-- [ ] Signup with new account
-- [ ] Login with credentials
-- [ ] Access protected routes (rating, create thread)
-- [ ] Logout and verify redirect
-
-#### 3. **Template Rendering** ✅
-- [ ] Show EJS partials (navbar, footer reused)
-- [ ] Demonstrate dynamic content rendering
-- [ ] Show flash messages on actions
-- [ ] Explain layout composition
-
-#### 4. **JavaScript Interactivity** ✅
-- [ ] Interactive star rating (hover, click)
-- [ ] Mobile menu toggle
-- [ ] User dropdown menu
-- [ ] Filter buttons (trending page)
-- [ ] Flash message auto-dismiss
-
-#### 5. **Database Relationships** ✅
-- [ ] User → Rating → Manga (many-to-many)
-- [ ] User → Thread (one-to-many)
-- [ ] Manga → Thread (one-to-many)
-- [ ] Thread → Replies (embedded documents)
-
----
-
-## 📚 Key Learning Points for Viva
-
-### 1. **Why EJS over Handlebars?**
-- Familiar JavaScript syntax (`<%= %>` tags)
-- Easy to learn and implement
-- Built-in support for partials (`<%- include() %>`)
-- Great for server-side rendering with Express
-
-### 2. **Session vs JWT Authentication**
-- Used session-based auth for simplicity
-- Sessions stored on server, sessionId in cookie
-- Suitable for traditional web applications
-- Express-session middleware handles it automatically
-
-### 3. **MongoDB Schema Design**
-- **Embedded vs Referenced:** Replies embedded in threads (one-to-few), Ratings as separate collection (many-to-many)
-- **Indexes:** Text index on manga title/description for search, compound unique index on (manga, user) for ratings
-- **Pre-save Hooks:** Password hashing, timestamp updates
-
-### 4. **RESTful Route Patterns**
-```
-GET    /resource         - List all (index)
-GET    /resource/:id     - Show one (show)
-GET    /resource/new     - New form (new)
-POST   /resource         - Create (create)
-GET    /resource/:id/edit - Edit form (edit)
-PUT    /resource/:id     - Update (update)
-DELETE /resource/:id     - Delete (destroy)
-```
-
-### 5. **Middleware Stack**
-```javascript
-app.use(express.static('public'))      // Static files
-app.use(express.urlencoded())          // Parse form data
-app.use(session())                     // Session management
-app.use(flash())                       // Flash messages
-app.use(methodOverride())              // DELETE/PUT support
-app.use(customMiddleware)              // Custom logic
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**1. MongoDB Connection Error**
-```
-Error: connect ECONNREFUSED 127.0.0.1:27017
-```
-**Solution:** Ensure MongoDB is running:
-```bash
-sudo systemctl start mongod
-# or check status
-sudo systemctl status mongod
-```
-
-**2. Port Already in Use**
-```
-Error: listen EADDRINUSE: address already in use :::3000
-```
-**Solution:** Change port in `.env` or kill process:
-```bash
-lsof -ti:3000 | xargs kill -9
-```
-
-**3. Session Secret Warning**
-```
-Warning: connect.session() MemoryStore is not designed for production
-```
-**Solution:** This is expected in development. For production, use MongoDB session store or Redis.
-
-**4. Module Not Found**
-```
-Error: Cannot find module 'express'
-```
-**Solution:** Reinstall dependencies:
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
----
-
-## 🚀 Future Enhancements
-
-- [ ] User profile pages with activity history
-- [ ] Advanced search with filters (genre, year, status)
-- [ ] Pagination for large datasets
-- [ ] Image upload for custom manga covers
-- [ ] Email verification for signup
-- [ ] Password reset functionality
-- [ ] Admin dashboard for manga management
-- [ ] Reading list / favorites feature
-- [ ] Notification system for thread replies
-- [ ] Social sharing integration
-- [ ] Dark mode toggle
-- [ ] Manga recommendations based on ratings
-
----
-
-## 📄 License
-
-This project is created for educational purposes as part of a web development course.
-
----
-
-## 👨‍💻 Developer
-
-**MangaVerse** - Full-Stack Manga Discussion Platform
-
-Built with ❤️ using Node.js, Express, MongoDB, and EJS
-
----
-
-## 📞 Support
-
-For questions or issues during the viva demonstration:
-
-1. Check the troubleshooting section above
-2. Verify all dependencies are installed (`npm install`)
-3. Ensure MongoDB is running
-4. Run seed script for sample data (`node config/seed.js`)
-5. Restart the server with Nodemon (`npm run dev`)
-
-**Happy Coding! 🎉**
+1. Connect your GitHub repository to Render.
+2. Render will automatically detect the `render.yaml` file.
+3. Ensure environment variables (`MONGO_URI`, `SESSION_SECRET`) are added to the Render dashboard under "Environment".
